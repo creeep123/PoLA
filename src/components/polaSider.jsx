@@ -1,9 +1,3 @@
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home/index';
-import PolaPage from './pages/Pola';
-import ProfilePage from './pages/Profile';
-import CoursePage from './pages/Course';
-import './App.css';
 import {
   DesktopOutlined,
   FileOutlined,
@@ -24,12 +18,17 @@ function getItem(label, key, icon, children) {
   };
 }
 const items = [
-  getItem(<Link to="/home">Home</Link>, '1', <PieChartOutlined />),
-  getItem(<Link to="/course">Course</Link>, '2', <DesktopOutlined />),
-  getItem(<Link to="/profile">Profile</Link>, '3', <TeamOutlined />),
-  getItem(<Link to="/pola">PoLA</Link>, '4', <FileOutlined />),
+  getItem(<Link to="/course">Course</Link>, '1', <PieChartOutlined />),
+  getItem('Option 2', '2', <DesktopOutlined />),
+  getItem('User', 'sub1', <UserOutlined />, [
+    getItem('Tom', '3'),
+    getItem('Bill', '4'),
+    getItem('Alex', '5'),
+  ]),
+  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+  getItem('Files', '9', <FileOutlined />),
 ];
-const App = () => {
+const PolaSider = (Children) => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout
@@ -48,14 +47,30 @@ const App = () => {
             padding: 0,
           }}
         />
-        {/* Content 路由*/}
-        <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/home" element={<Home />} />
-          <Route path="/course" element={<CoursePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/pola" element={<PolaPage />} />
-        </Routes>
+        <Children></Children>
+        {/* <Content
+          style={{
+            margin: '0 16px',
+          }}
+        >
+          <Breadcrumb
+            style={{
+              margin: '16px 0',
+            }}
+          >
+            <Breadcrumb.Item>User</Breadcrumb.Item>
+            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+          </Breadcrumb>
+          <div
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              minHeight: 360,
+            }}
+          >
+            Bill is a cat.
+          </div>
+        </Content> */}
         <Footer
           style={{
             textAlign: 'center',
@@ -67,4 +82,4 @@ const App = () => {
     </Layout>
   );
 };
-export default App;
+export default PolaSider;
