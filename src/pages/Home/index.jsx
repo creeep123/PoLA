@@ -6,6 +6,8 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
+import { Col, Row } from 'antd';
+import CourseList from '../../components/courseList';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
@@ -46,7 +48,62 @@ const Home = () => {
           minHeight: 360,
         }}
       >
-        This is home.
+        <Row>
+          <Col span={14}>
+            <Row>
+              <Col span={24}>
+                <img
+                  width="100%"
+                  src={require('./assets/HEADER.png')}
+                  alt="Girl in a jacket"
+                ></img>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24}>
+                <CourseList></CourseList>
+              </Col>
+            </Row>
+          </Col>
+          <Col span={10} style={{ paddingLeft: '24px' }}>
+            <Row>
+              <Col span={24} style={{ marginTop: '46px' }}>
+                <img
+                  width="100%"
+                  src={require('./assets/Searchbar.png')}
+                  alt="Girl in a jacket"
+                ></img>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24} style={{ marginTop: '16px' }}>
+                <img
+                  width="100%"
+                  src={require('./assets/STATS BOXES.png')}
+                  alt="Girl in a jacket"
+                ></img>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24} style={{ marginTop: '16px' }}>
+                <img
+                  width="100%"
+                  src={require('./assets/YOUR STATISTICS SECTION.png')}
+                  alt="Girl in a jacket"
+                ></img>
+              </Col>
+            </Row>
+            {/* <Row>
+              <Col span={24} style={{ marginTop: '16px' }}>
+                <img
+                  width="100%"
+                  src={require('./assets/GO PREMIUM BANNER.png')}
+                  alt="Girl in a jacket"
+                ></img>
+              </Col>
+            </Row> */}
+          </Col>
+        </Row>
       </div>
     </Content>
   );

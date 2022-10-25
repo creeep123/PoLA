@@ -71,13 +71,13 @@ const PolaSider = (Children) => {
             Bill is a cat.
           </div>
         </Content> */}
-        <Footer
+        {/* <Footer
           style={{
             textAlign: 'center',
           }}
         >
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+          PoLA Platform ©2018 Created by Ant UED
+        </Footer> */}
       </Layout>
     </Layout>
   );

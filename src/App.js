@@ -3,7 +3,7 @@ import Home from './pages/Home/index';
 import PolaPage from './pages/Pola';
 import ProfilePage from './pages/Profile';
 import CoursePage from './pages/Course';
-import './App.css';
+import './App.less';
 import {
   DesktopOutlined,
   FileOutlined,
@@ -37,18 +37,19 @@ const App = () => {
         minHeight: '100vh',
       }}
     >
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+      <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout className="site-layout">
-        <Header
+        {/* <Header
           className="site-layout-background"
           style={{
             padding: 0,
           }}
-        />
+        /> */}
         {/* Content 路由*/}
+        <div className='content-router'>
         <Routes>
         {/* <Route path="/" element={<Home />} /> */}
           <Route path="/home" element={<Home />} />
@@ -56,13 +57,14 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/pola" element={<PolaPage />} />
         </Routes>
-        <Footer
+        </div>
+        {/* <Footer
           style={{
             textAlign: 'center',
           }}
         >
           Ant Design ©2018 Created by Ant UED
-        </Footer>
+        </Footer> */}
       </Layout>
     </Layout>
   );
