@@ -5,3 +5,4 @@
 4. 页面文件在 `src/pages/` 下
 5. 通用组件在 `src/components` 下
 6. 全局样式写在 `App.less` 中
+7. 使用组件库：https://ant.design/
