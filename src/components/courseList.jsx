@@ -1,6 +1,9 @@
 import { Avatar, List, Button } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+
 const data = [
   {
     title: 'Design Thinking',
@@ -27,9 +30,11 @@ const CourseList = () => (
       <List.Item
         className="course-item-style"
         actions={[
-          <Button type="primary" shape="round">
-            View Course
-          </Button>,
+          <Link to="/course/enroll">
+            <Button type="primary" shape="round">
+              View Course
+            </Button>,
+          </Link>
         ]}
       >
         <List.Item.Meta

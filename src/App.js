@@ -4,6 +4,7 @@ import PolaPage from './pages/Pola';
 import PolaDetailPage from './pages/PolaDetail';
 import ProfilePage from './pages/Profile';
 import CoursePage from './pages/Course';
+import Enroll from './pages/Course/enroll';
 import './App.less';
 import {
   DesktopOutlined,
@@ -58,6 +59,7 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/pola" element={<PolaPage />} />
           <Route path="/pola/detail" element={<PolaDetailPage />} />
+          <Route path="/course/enroll" element={<Enroll />} />
         </Routes>
         </div>
         {/* <Footer
