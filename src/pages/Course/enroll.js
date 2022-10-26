@@ -1,5 +1,7 @@
 import { Avatar, Button, Tag, Card, Layout, Col, Row } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 const { Header, Footer, Sider, Content } = Layout;
 const Enroll = () => {
     return(
@@ -35,9 +37,12 @@ const Enroll = () => {
                       <Tag>User Research</Tag>
                     </p>
                     <p>&nbsp;</p>
-                    <Button type="primary" shape="round">
-                    Enroll
-                    </Button>
+                    <Link to='/course/detail'>
+                      <Button type="primary" shape="round">
+                        Enroll
+                      </Button>
+                    </Link>
+                    
                   </Card>
             </Col>
             </Row>
