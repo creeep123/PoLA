@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/index';
 import PolaPage from './pages/Pola';
+import PolaDetailPage from './pages/PolaDetail';
 import ProfilePage from './pages/Profile';
 import CoursePage from './pages/Course';
 import './App.less';
@@ -37,7 +38,7 @@ const App = () => {
         minHeight: '100vh',
       }}
     >
-      <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+      <Sider theme="dark" collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
@@ -56,6 +57,7 @@ const App = () => {
           <Route path="/course" element={<CoursePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/pola" element={<PolaPage />} />
+          <Route path="/pola/detail" element={<PolaDetailPage />} />
         </Routes>
         </div>
         {/* <Footer

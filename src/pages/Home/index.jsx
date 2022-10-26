@@ -5,6 +5,7 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { Button, Modal } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Col, Row } from 'antd';
 import CourseList from '../../components/courseList';
@@ -33,12 +34,74 @@ const items = [
   ]),
   getItem('Files', '9', <FileOutlined />),
 ];
+
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleOk = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+    }, 3000);
+  };
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
+  const searchModal = () => {
+    return (
+      <>
+        <img
+          onClick={showModal}
+          width="100%"
+          src={require('./assets/Searchbar.png')}
+          alt="Girl in a jacket"
+        ></img>
+        <Modal
+          open={open}
+          title="Search Results"
+          onOk={handleOk}
+          onCancel={handleCancel}
+          // footer={[
+          //   <Button key="back" onClick={handleCancel}>
+          //     Return
+          //   </Button>,
+          //   <Button
+          //     key="submit"
+          //     type="primary"
+          //     loading={loading}
+          //     onClick={handleOk}
+          //   >
+          //     Submit
+          //   </Button>,
+          //   <Button
+          //     key="link"
+          //     href="https://google.com"
+          //     type="primary"
+          //     loading={loading}
+          //     onClick={handleOk}
+          //   >
+          //     Search on Google
+          //   </Button>,
+          // ]}
+          footer={null}
+        >
+          <CourseList></CourseList>
+        </Modal>
+      </>
+    );
+  };
+
   return (
     <Content
       style={{
         margin: '0 16px',
+        height: '100vh',
       }}
     >
       <div
@@ -59,6 +122,11 @@ const Home = () => {
                 ></img>
               </Col>
             </Row>
+            <Row style={{ marginTop: '16px' }}>
+              <Col span={24} className="pola-title">
+                Enrolled Courses
+              </Col>
+            </Row>
             <Row>
               <Col span={24}>
                 <CourseList></CourseList>
@@ -68,11 +136,7 @@ const Home = () => {
           <Col span={10} style={{ paddingLeft: '24px' }}>
             <Row>
               <Col span={24} style={{ marginTop: '46px' }}>
-                <img
-                  width="100%"
-                  src={require('./assets/Searchbar.png')}
-                  alt="Girl in a jacket"
-                ></img>
+                {searchModal()}
               </Col>
             </Row>
             <Row>
