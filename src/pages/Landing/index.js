@@ -1,7 +1,7 @@
 import { Layout, Button } from 'antd';
 import { message } from 'antd';
 import { Col, Row } from 'antd';
-import React, { useState, useContext  } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Web3 from 'web3';
 import backgroundImg from './assets/landing-bg.png';
@@ -12,6 +12,8 @@ const { Text } = Typography;
 const Landing = () => {
   const [walletAddress, setWalletAddress] = useState('');
   const [connected, setConnected] = useState('');
+  const polaContext = useContext(PolaContext);
+  const { role, address } = PolaContext.store;
 
   async function connectWallet() {
     if (typeof window.ethereum !== 'undefined') {
@@ -31,15 +33,19 @@ const Landing = () => {
       console.log('Your wallet address:' + myAccount);
       setWalletAddress(myAccount);
       setConnected(true);
+      polaContext.setStore({
+        address: myAccount,
+        role:
+          myAccount === '0x4Be9933b776d2DAd8332b3DBC63Da698E3e333d4'
+            ? 'student'
+            : 'teacher',
+      });
       message.success('Wallet Connected Successfully');
       // 返回指定地址账户的余额
       // var balance = await web3.eth.getBalance(myAccount);
       // console.log(balance, 2);
     }
   }
-
-  const polaContext = useContext(PolaContext);
-  const {role, address} = PolaContext.store
 
   return (
     <div
@@ -57,14 +63,14 @@ const Landing = () => {
         <Col span={4} style={{ marginTop: '24px' }}>
           {connected ? (
             <Link to="/home">
-            <Button
-              type="primary"
-              shape="round"
-              size={'large'}
-              // onClick={connectWallet}
-            >
-              Launch App
-            </Button>
+              <Button
+                type="primary"
+                shape="round"
+                size={'large'}
+                // onClick={connectWallet}
+              >
+                Launch App
+              </Button>
             </Link>
           ) : (
             <Button

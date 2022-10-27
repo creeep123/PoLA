@@ -1,15 +1,20 @@
-import { Button, Modal } from 'antd';
+import { Select } from 'antd';
+import { Button, Modal, Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Col, Row } from 'antd';
 import CourseList from '../../components/courseList';
 import React, { useContext, useState } from 'react';
 import PolaContext from '../../components/context';
 import { Link } from 'react-router-dom';
+import courseData from '../../components/coursesData';
 const { Content } = Layout;
+const { Option } = Select;
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [searchCourse, setSearchCourse] = useState("")
   const [open, setOpen] = useState(false);
   const showModal = () => {
     setOpen(true);
@@ -25,15 +30,37 @@ const Home = () => {
     setOpen(false);
   };
 
+  const children = [];
+  for (let i = 0; i < courseData.length; i++) {
+    children.push(
+      <Option key={courseData[i].courseName}>{courseData[i].courseName}</Option>
+    );
+  }
+
   const searchModal = () => {
     return (
       <>
-        <img
-          onClick={showModal}
-          width="100%"
-          src={require('./assets/Searchbar.png')}
-          alt="Girl in a jacket"
-        ></img>
+        <div style={{ display: 'flex' }}>
+          <Select
+            onChange={(key) => {
+              setSearchCourse(key)
+              showModal();
+            }}
+            size="large"
+            showSearch
+            placeholder="Search Courses"
+            optionFilterProp="children"
+            prefix={<SearchOutlined />}
+            // onChange={onChange}
+            // onSearch={onSearch}
+            style={{ borderRadius: '14px', width: '100%' }}
+            // filterOption={(input, option) =>
+            //   option.children.toLowerCase().includes(input.toLowerCase())
+            // }
+          >
+            {children}
+          </Select>
+        </div>
         <Modal
           open={open}
           title="Search Results"
@@ -47,7 +74,7 @@ const Home = () => {
     );
   };
 
-  const polaContext = useContext(PolaContext)
+  const polaContext = useContext(PolaContext);
   const { role, address } = polaContext.store;
 
   return (

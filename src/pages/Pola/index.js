@@ -7,6 +7,7 @@ import {
   Col,
   Button,
   message,
+  Tag,
 } from 'antd';
 import React, { useState } from 'react';
 import { Collapse } from 'antd';
@@ -26,6 +27,17 @@ const PolaPage = () => {
   };
 
   const [redeemed, setRedeemed] = useState(false);
+
+  const renderTabHeader = (headerContent, points) => {
+    headerContent = 'Design Thinking';
+    points = '27';
+    return (
+      <>
+        {headerContent}&nbsp;&nbsp;
+        <Tag color="blue">Points: {points}</Tag>
+      </>
+    );
+  };
 
   const renderPolaItem = (level, date, mkey = 999) => {
     return (
@@ -102,7 +114,7 @@ const PolaPage = () => {
 
     return (
       <Collapse defaultActiveKey={['1']} onChange={onChange}>
-        <Panel header="Design Thinking" key="1">
+        <Panel header={renderTabHeader("Design Thinking")} key="1">
           <div style={{ display: 'flex' }}>
             {renderRedeemPolaItem('c', false)}
             {renderRedeemPolaItem('b', !redeemed)}
@@ -136,7 +148,7 @@ const PolaPage = () => {
 
     return (
       <Collapse defaultActiveKey={['1']} onChange={onChange}>
-        <Panel header="Design Thinking" key="1">
+        <Panel header={"Design Thinking"} key="1">
           <div style={{ display: 'flex' }}>
             {renderPolaItem('c', '22')}
             {redeemed ? renderPolaItem('b', '8888') : ''}
