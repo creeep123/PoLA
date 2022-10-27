@@ -1,6 +1,6 @@
 import { Avatar, Button, Tag, Card, Layout, Col, Row } from 'antd';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 const { Header, Footer, Sider, Content } = Layout;
 const Enroll = () => {
@@ -20,7 +20,7 @@ const Enroll = () => {
       >
         <Row gutter={[32,32]}>
           <Col span={24}>
-          <Col span={24}>
+              <Col span={24}>
             <Row justify='space-around' align='middle'>
             <Col span={4}>
                   <img
