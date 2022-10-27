@@ -6,6 +6,10 @@ import courseData from '../../components/coursesData';
 const { Header, Footer, Sider, Content } = Layout;
 const Enroll = () => {
   const { courseName } = useParams();
+  const currentCourseData = courseData.filter(
+    (item) => item.courseName === courseName
+  )[0];
+  const { teacher } = currentCourseData;
 
   return (
     <Layout>
@@ -29,7 +33,12 @@ const Enroll = () => {
                   <Col span={4}>
                     <img
                       width="100%"
-                      src={require('./assets/courseicon.jpg')}
+                      // src={require('./assets/courseicon.jpg')}
+                      src={
+                        courseName === 'Design Thinking'
+                          ? require('./assets/courseicon.jpg')
+                          : 'https://random.imagecdn.app/300/300'
+                      }
                       alt="courseicon"
                     ></img>
                   </Col>
@@ -59,7 +68,7 @@ const Enroll = () => {
                   <Col span={4}>
                     <div>
                       <Avatar src="https://joeschmoe.io/api/v1/random" />
-                      Valeri Jaiden
+                      {teacher}
                     </div>
                   </Col>
                   <Col flex="" span={10}></Col>
