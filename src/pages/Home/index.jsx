@@ -1,39 +1,11 @@
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
 import { Button, Modal } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Col, Row } from 'antd';
 import CourseList from '../../components/courseList';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import PolaContext from '../../components/context';
 import { Link } from 'react-router-dom';
-const { Header, Content, Footer, Sider } = Layout;
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-const items = [
-  getItem(<Link to="/course">Course</Link>, '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [
-    getItem('Team 1', '6'),
-    getItem('Team 2', '8'),
-  ]),
-  getItem('Files', '9', <FileOutlined />),
-];
+const { Content } = Layout;
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -67,28 +39,6 @@ const Home = () => {
           title="Search Results"
           onOk={handleOk}
           onCancel={handleCancel}
-          // footer={[
-          //   <Button key="back" onClick={handleCancel}>
-          //     Return
-          //   </Button>,
-          //   <Button
-          //     key="submit"
-          //     type="primary"
-          //     loading={loading}
-          //     onClick={handleOk}
-          //   >
-          //     Submit
-          //   </Button>,
-          //   <Button
-          //     key="link"
-          //     href="https://google.com"
-          //     type="primary"
-          //     loading={loading}
-          //     onClick={handleOk}
-          //   >
-          //     Search on Google
-          //   </Button>,
-          // ]}
           footer={null}
         >
           <CourseList></CourseList>
@@ -96,6 +46,9 @@ const Home = () => {
       </>
     );
   };
+
+  const polaContext = useContext(PolaContext)
+  const { role, address } = polaContext.store;
 
   return (
     <Content
@@ -124,7 +77,7 @@ const Home = () => {
             </Row>
             <Row style={{ marginTop: '16px' }}>
               <Col span={24} className="pola-title">
-                Enrolled Courses
+                Enrolled Courses ////// Current Role is: {role}
               </Col>
             </Row>
             <Row>
@@ -157,15 +110,6 @@ const Home = () => {
                 ></img>
               </Col>
             </Row>
-            {/* <Row>
-              <Col span={24} style={{ marginTop: '16px' }}>
-                <img
-                  width="100%"
-                  src={require('./assets/GO PREMIUM BANNER.png')}
-                  alt="Girl in a jacket"
-                ></img>
-              </Col>
-            </Row> */}
           </Col>
         </Row>
       </div>

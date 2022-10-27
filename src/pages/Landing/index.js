@@ -1,13 +1,13 @@
-import { Breadcrumb, Layout, Menu, Button } from 'antd';
+import { Layout, Button } from 'antd';
 import { message } from 'antd';
 import { Col, Row } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useContext  } from 'react';
 import { Link } from 'react-router-dom';
 import Web3 from 'web3';
 import backgroundImg from './assets/landing-bg.png';
 import { Typography } from 'antd';
-const { Paragraph, Text } = Typography;
-const { Header, Content, Footer, Sider } = Layout;
+import PolaContext from '../../components/context';
+const { Text } = Typography;
 
 const Landing = () => {
   const [walletAddress, setWalletAddress] = useState('');
@@ -21,7 +21,7 @@ const Landing = () => {
       window.web3 = new Web3(ethereum);
       let web3 = window.web3;
       // 请求用户授权 解决web3js无法直接唤起Meta Mask获取用户身份
-      const enable = await ethereum.enable();
+      // const enable = await ethereum.enable();
       // console.log(enable, 11);
       // 授权获取账户
       var accounts = await web3.eth.getAccounts();
@@ -38,12 +38,8 @@ const Landing = () => {
     }
   }
 
-  // useEffect(() => {
-  //   const getWalletAddr = async () => {
-  //     await get();
-  //   };
-  //   getWalletAddr();
-  // });
+  const polaContext = useContext(PolaContext);
+  const {role, address} = PolaContext.store
 
   return (
     <div
