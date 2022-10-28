@@ -224,18 +224,39 @@ const ProfilePage = () => {
             marginBottom: "20px",
           }}
         ></div>
-        <Dragger
-          {...props}
-          disabled={true}
-          style={{ marginTop: "40px", marginBottom: "40px" }}
-        >
-          <p className="ant-upload-drag-icon">
-            <CameraOutlined />
-          </p>
-          <p className="ant-upload-text">Take a photo right now</p>
-        </Dragger>
+        <button type="button" id="start-camera">open camera</button>
+        <button type="button" id="snapshot-btn">take picture</button>
+        <video id="preview-box" width="300" height="300" autoplay></video>
+        <canvas width="300" height="300"></canvas>
       </Modal>
     </Content>
   );
 };
+
+const startCameraBtn = document.querySelector('#start-camera');  // 打开摄像头按钮
+const snapshotBtn = document.querySelector('#snapshot-btn');  // 拍照按钮
+const exportBtn = document.querySelector('#export-btn');  // 导出照片按钮
+const previewBox = document.querySelector('#preview-box');  // 预览区
+const canvas = document.querySelector('canvas');  // canvas用来显示拍摄的照片
+let imgData = null;  // 存储图片数据
+
+// 打开摄像头按钮点击
+startCameraBtn.addEventListener('click', () => {
+  // 申请摄像头权限
+  navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(stream => {
+    // 把媒体流直接传给 video 的 srcObject
+    previewBox.srcObject = stream;
+  }).catch(info => {
+    alert('无法获取摄像头权限：' + info);
+  });
+});
+
+// 拍照按钮点击
+snapshotBtn.addEventListener('click', () => {
+  // 绘制 2D 图像
+  canvas.getContext('2d').drawImage(previewBox, 0, 0, previewBox.width, previewBox.height);
+  // 把 canvas 的图像转换为 dataURL 数据
+  imgData = canvas.toDataURL('image/jpeg');
+});
+
 export default ProfilePage;
