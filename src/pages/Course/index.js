@@ -27,17 +27,17 @@ const Course = () => {
         }}
       >
         <Col span={14}>
-            <Row style={{ marginTop: '16px' }}>
-              <Col span={24} className="pola-title">
-                Enrolled Courses
-              </Col>
-            </Row>
-            <Row>
-              <Col span={24}>
-                <CourseList></CourseList>
-              </Col>
-            </Row>
-          </Col>
+          <Row style={{ marginTop: '16px' }}>
+            <Col span={24} className="pola-title">
+              Enrolled Courses
+            </Col>
+          </Row>
+          <Row>
+            <Col span={24}>
+              <CourseList></CourseList>
+            </Col>
+          </Row>
+        </Col>
       </div>
     </Content>
   );
