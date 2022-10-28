@@ -29,8 +29,6 @@ const PolaPage = () => {
   const [redeemed, setRedeemed] = useState(false);
 
   const renderTabHeader = (headerContent, points) => {
-    headerContent = 'Design Thinking';
-    points = '27';
     return (
       <>
         {headerContent}&nbsp;&nbsp;
@@ -53,13 +51,18 @@ const PolaPage = () => {
               {date == 8888 ? `Redeemed Today` : `Redeemed on 2022/10/${date}`}
             </Col>
           </Row>
+          <Row>
+            <Col span={24} className="pola-date-sub">
+              <Button type="primary">Detail</Button>
+            </Col>
+          </Row>
         </div>
       </Link>
     );
   };
 
   const handleRedeem = () => {
-    message.success('Redeem Success');
+    message.success('Redeem Success, points -20');
     setRedeemed(true);
   };
 
@@ -114,7 +117,14 @@ const PolaPage = () => {
 
     return (
       <Collapse defaultActiveKey={['1']} onChange={onChange}>
-        <Panel header={renderTabHeader("Design Thinking")} key="1">
+        <Panel
+          header={
+            redeemed
+              ? renderTabHeader('Design Thinking', '7')
+              : renderTabHeader('Design Thinking', '27')
+          }
+          key="1"
+        >
           <div style={{ display: 'flex' }}>
             {renderRedeemPolaItem('c', false)}
             {renderRedeemPolaItem('b', !redeemed)}
@@ -148,7 +158,7 @@ const PolaPage = () => {
 
     return (
       <Collapse defaultActiveKey={['1']} onChange={onChange}>
-        <Panel header={"Design Thinking"} key="1">
+        <Panel header={'Design Thinking'} key="1">
           <div style={{ display: 'flex' }}>
             {renderPolaItem('c', '22')}
             {redeemed ? renderPolaItem('b', '8888') : ''}

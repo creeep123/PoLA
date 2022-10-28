@@ -7,6 +7,7 @@ import courseData from './coursesData';
 const data = courseData;
 const CourseList = () => (
   <List
+    style={{ overflow: 'auto', height: '330px' }}
     itemLayout="horizontal"
     dataSource={data}
     renderItem={(item) => (

@@ -104,7 +104,7 @@ const Home = () => {
             </Row>
             <Row style={{ marginTop: '16px' }}>
               <Col span={24} className="pola-title">
-                Enrolled Courses ////// Current Role is: {role}
+                Popular Courses ////// Current Role is: {role}
               </Col>
             </Row>
             <Row>

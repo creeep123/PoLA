@@ -30,7 +30,9 @@ const PolaDetailPage = () => {
           >
             <img src={require('./assets/PoLA-c.png')}></img>
           </Col>
-          <Col span={12}></Col>
+          <Col span={12}>
+              course code, course name, teaching team, start date, end data and level
+          </Col>
         </Row>
       </div>
     );
