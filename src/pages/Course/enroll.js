@@ -1,10 +1,14 @@
-import { Avatar, Button, Tag, Card, Layout, Col, Row } from 'antd';
-import React from 'react';
+import { Avatar, Button, Tag, Card, Layout, Col, Row, message } from 'antd';
+import React, { useContext } from 'react';
 import { Link, redirect, useParams } from 'react-router-dom';
 import courseData from '../../components/coursesData';
+import PolaContext from '../../components/context';
 
 const { Header, Footer, Sider, Content } = Layout;
 const Enroll = () => {
+  const polaContext = useContext(PolaContext);
+  const { enrolledCourses } = polaContext.store;
+
   const { courseName } = useParams();
   const currentCourseData = courseData.filter(
     (item) => item.courseName === courseName
@@ -32,6 +36,7 @@ const Enroll = () => {
                 <Row justify="space-around" align="middle">
                   <Col span={4}>
                     <img
+                      key={courseName}
                       width="100%"
                       // src={require('./assets/courseicon.jpg')}
                       src={
@@ -55,8 +60,19 @@ const Enroll = () => {
                       </p>
                       <p>&nbsp;</p>
                       <Link to="/course/detail">
-                        <Button type="primary" shape="round">
-                          Enroll
+                        <Button
+                          type="primary"
+                          shape="round"
+                          onClick={() => {
+                            polaContext.setStore({
+                              enrolledCourses: [...enrolledCourses, courseName],
+                            });
+                            message.success("Enrolled Course successfully")
+                          }}
+                        >
+                          {enrolledCourses.includes(courseName)
+                            ? 'View Course'
+                            : 'Enroll'}
                         </Button>
                       </Link>
                     </Card>
