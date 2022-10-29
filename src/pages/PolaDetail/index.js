@@ -1,8 +1,9 @@
-import { Button, Layout } from 'antd';
+import { Card, Button, Layout, Avatar } from 'antd';
 import React from 'react';
-import {Link} from 'react-router-dom' ;
+import { Link } from 'react-router-dom';
 import { Upload, Tabs, Row, Col } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+const { Meta } = Card;
 const { Dragger } = Upload;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -25,13 +26,37 @@ const PolaDetailPage = () => {
             style={{
               display: 'flex',
               alignItems: 'center',
-              paddingLeft: '72px',
+              paddingLeft: '152px',
             }}
           >
             <img src={require('./assets/PoLA-c.png')}></img>
           </Col>
           <Col span={12}>
-              course code, course name, teaching team, start date, end data and level
+            <Card
+              hoverable
+              style={{
+                borderRadius: '14px',
+                width: 480,
+              }}
+              cover={
+                <img
+                  alt="example"
+                  style={{
+                    borderRadius: '14px',
+                  }}
+                  src={require('./assets/PoLA-banner.png')}
+                />
+              }
+            >
+              <Meta
+                title={`Design Thinking`}
+                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                description="by Alan Walker"
+              />
+              <p>Start: 2022/07/02</p>
+              <p>Finish: 2022/10/01</p>
+              <p>Level: C</p>
+            </Card>
           </Col>
         </Row>
       </div>
