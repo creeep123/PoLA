@@ -1,4 +1,5 @@
-import { Tabs,Layout,Row,Col,Menu } from 'antd';
+import { Tabs,Layout,Row,Col,Menu,Form,Input,Button } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
 import { Content } from 'antd/lib/layout/layout';
 import { Link, redirect, useParams } from 'react-router-dom';
 import Week1 from './subPages/week1';
@@ -31,6 +32,8 @@ const onChange = (key) => {
 
 
 const Lecture = (level) => {
+    const polaContext = useContext(PolaContext);
+    const { role, address } = polaContext.store;
     const items = [
         getItem('Week 1', '1'),
         getItem('Week 2', '2'),
@@ -40,6 +43,17 @@ const Lecture = (level) => {
     const onClick = (e) => {
         console.log('click ', e);
         setCurrent(e.key);
+    };
+    const [URL, setURL] = useState('');
+    const [Description, setDescription] = useState('');
+
+    const handleSubmit = event => {
+        message.success('Submited Successfully');
+        event.preventDefault(); // 👈️ prevent page refresh
+
+        // 👇️ clear all input values in the form
+        setURL('');
+        setDescription('');
     };
     let detailLecture;
     if (current=='1'){
@@ -51,7 +65,7 @@ const Lecture = (level) => {
     }
     return(
         <Row>
-            <Col span={6}>
+            <Col span={5}>
                 <Row>
                     <Col span={24}>
                     <img
@@ -77,8 +91,40 @@ const Lecture = (level) => {
                     </Col>
                 </Row>
             </Col>
-            <Col span={12}>
+            <Col span={13}>
                 {detailLecture}
+            </Col>
+            <Col span={6}>
+                <Row justify='space-around'>
+                    <Col span={20}>
+                        Upload New Video
+                    </Col>
+                    <Col span={20}>
+                    <Form
+                        layout="vertical"
+                    >
+                        <Form.Item label="1. Please put in the URL.">
+                            <Input 
+                                onChange={event => setURL(event.target.value)}
+                                value={URL}
+                            />
+                        </Form.Item>
+                        <Form.Item label="2. Please put in the description.">
+                            <TextArea 
+                                rows={6} 
+                                cols={1200}
+                                onChange={event => setDescription(event.target.value)}
+                                value={Description}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" onClick={handleSubmit}>
+                                Submit
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                    </Col>
+                </Row>
             </Col>
         </Row>
     )
@@ -105,7 +151,7 @@ const Assignment = (level) => {
     }
     return(
         <Row>
-            <Col span={6}>
+            <Col span={5}>
                 <Row>
                     <Col span={24}>
                         Assignments
@@ -124,7 +170,7 @@ const Assignment = (level) => {
                     </Col>
                 </Row>
             </Col>
-            <Col span={12}>
+            <Col span={13}>
                 {detailAssignment}
             </Col>
         </Row>
@@ -153,7 +199,7 @@ const Discussion = (level) => {
 
     return(
         <Row>
-            <Col span={6}>
+            <Col span={5}>
                 <Row>
                     <Col span={24}>
                         Discussion
@@ -172,7 +218,7 @@ const Discussion = (level) => {
                     </Col>
                 </Row>
             </Col>
-            <Col span={18} style={{overflow:"auto", height:"560px"}}>
+            <Col span={19} style={{overflow:"auto", height:"560px"}}>
                 {detailDiscussion}
             </Col>
         </Row>

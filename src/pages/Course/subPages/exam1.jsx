@@ -10,13 +10,17 @@ const { Dragger } = Upload;
 
 
 function Exam1() {
-    const onCheck = async () => {
-        try {
-          console.log('Success:');
-        } catch (errorInfo) {
-          console.log('Failed:');
-        }
-      };
+    const [Name, setName] = useState('');
+    const [Answer, setAnswer] = useState('');
+
+    const handleSubmit = event => {
+        message.success('Submited Successfully');
+        event.preventDefault(); // 👈️ prevent page refresh
+
+        // 👇️ clear all input values in the form
+        setName('');
+        setAnswer('');
+    };
     return(
         <Row>
                     <Col span={24}>
@@ -27,13 +31,21 @@ function Exam1() {
                         layout="vertical"
                     >
                         <Form.Item label="1. What's your name?">
-                            <Input />
+                            <Input 
+                                onChange={event => setName(event.target.value)}
+                                value={Name}
+                            />
                         </Form.Item>
                         <Form.Item label="2. Prove the existence of aliens.">
-                            <TextArea rows={6} cols={1200}/>
+                            <TextArea 
+                                rows={6} 
+                                cols={1200}
+                                onChange={event => setAnswer(event.target.value)}
+                                value={Answer}
+                            />
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" onClick={onCheck}>
+                            <Button type="primary" onClick={handleSubmit}>
                                 Submit
                             </Button>
                         </Form.Item>
