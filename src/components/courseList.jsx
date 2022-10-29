@@ -10,6 +10,13 @@ const CourseList = () => {
   const polaContext = useContext(PolaContext);
   const { enrolledCourses } = polaContext.store;
 
+  const handleDropCourse = (droppingCourseName) => {
+    enrolledCourses.splice(enrolledCourses.indexOf(droppingCourseName),1)
+    polaContext.setStore({
+      enrolledCourses: [...enrolledCourses],
+    });
+  };
+
   return (
     <List
       style={{ overflow: 'auto', height: '330px' }}
@@ -19,13 +26,22 @@ const CourseList = () => {
         <List.Item
           className="course-item-style"
           actions={[
-            <Button 
-              type="primary" 
-              shape="round" 
-              disabled={enrolledCourses.includes(item.courseName)
-                ? false
-                : true}
-              danger="true">
+            <Button
+              onClick={() => {
+                handleDropCourse(item.courseName);
+              }}
+              type="primary"
+              shape="round"
+              style={
+                enrolledCourses.includes(item.courseName)
+                  ? null
+                  : { display: 'none' }
+              }
+              // disabled={enrolledCourses.includes(item.courseName)
+              //   ? false
+              //   : true}
+              danger="true"
+            >
               Drop
             </Button>,
             <Link to={`/course/enroll/${item.courseName}`}>
