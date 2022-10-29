@@ -59,7 +59,7 @@ const Enroll = () => {
                         <Tag>User Research</Tag>
                       </p>
                       <p>&nbsp;</p>
-                      <Link to="/course/detail">
+                      <Link to= {`/course/detail/${courseName}`}>
                         <Button
                           type="primary"
                           shape="round"
@@ -67,7 +67,6 @@ const Enroll = () => {
                             polaContext.setStore({
                               enrolledCourses: [...enrolledCourses, courseName],
                             });
-                            message.success("Enrolled Course successfully")
                           }}
                         >
                           {enrolledCourses.includes(courseName)

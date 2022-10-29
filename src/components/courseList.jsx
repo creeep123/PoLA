@@ -19,6 +19,15 @@ const CourseList = () => {
         <List.Item
           className="course-item-style"
           actions={[
+            <Button 
+              type="primary" 
+              shape="round" 
+              disabled={enrolledCourses.includes(item.courseName)
+                ? false
+                : true}
+              danger="true">
+              Drop
+            </Button>,
             <Link to={`/course/enroll/${item.courseName}`}>
               <Button type="primary" shape="round">
                 View Course
