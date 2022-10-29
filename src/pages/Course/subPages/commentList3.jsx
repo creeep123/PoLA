@@ -7,13 +7,13 @@ const { Paragraph } = Typography;
 const data = [
   {
     avatar: 'https://api.multiavatar.com/Starcrasher.svg',
-    title: 'Apple Seed',
+    title: 'Android Seed',
     description:
       'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, inventore laboriosam!',
   },
   {
     avatar: 'https://api.multiavatar.com/Starcrasher.svg',
-    title: 'Banana Long',
+    title: 'Sausage Long',
     description:
       'Iusto ex ad placeat dolor tempora dolores provident hic, modi voluptatem deserunt possimus, architecto dignissimos quod fugiat enim iste, corporis neque numquam.',
   },
@@ -31,7 +31,7 @@ const data = [
   },
 ];
 
-class CommentList extends Component {
+class CommentList3 extends Component {
   state = {
     data,
     add: {
@@ -189,4 +189,4 @@ class CommentList extends Component {
   }
 }
 
-export default CommentList;
+export default CommentList3;
