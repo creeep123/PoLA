@@ -114,7 +114,7 @@ class CommentList extends Component {
                 title={
                   <>
                     {item.title}&nbsp;
-                    {index === data.length - 1 ? (
+                    {index === data.length - 1 && item.title === 'David' ? (
                       <Button
                         danger
                         onClick={this.deleteCommentStr}
@@ -131,7 +131,7 @@ class CommentList extends Component {
                 description={
                   <Paragraph
                     editable={
-                      index === data.length - 1
+                      index === data.length - 1 && item.title === 'David'
                         ? {
                             tooltip: 'click to edit text',
                             onChange: this.setCommentStr,
