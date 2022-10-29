@@ -61,7 +61,7 @@ const App = () => {
           <Route path="/pola" element={<PolaPage />} />
           <Route path="/pola/detail" element={<PolaDetailPage />} />
           <Route path="/course/enroll/:courseName" element={<Enroll />} />
-          <Route path="/course/detail" element={<Detail />} />
+          <Route path="/course/detail/:courseName" element={<Detail />} />
         </Routes>
         </div>
         {/* <Footer
