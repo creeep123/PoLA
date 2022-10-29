@@ -6,6 +6,7 @@ import Week2 from './subPages/week2';
 import Week3 from './subPages/week3';
 import Assignment1 from './subPages/assignment1';
 import Assignment2 from './subPages/assignment2';
+import Exam1 from './subPages/exam1';
 import CommentList1 from './subPages/commentList1';
 import CommentList2 from './subPages/commentList2';
 import CommentList3 from './subPages/commentList3';
@@ -99,6 +100,8 @@ const Assignment = (level) => {
         detailAssignment = <Assignment1></Assignment1>;
     } else if (current=='2'){
         detailAssignment = <Assignment2></Assignment2>;
+    } else if (current=='3'){
+        detailAssignment = <Exam1></Exam1>;
     }
     return(
         <Row>
