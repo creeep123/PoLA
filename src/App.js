@@ -9,12 +9,11 @@ import Detail from './pages/Course/detail';
 import './App.less';
 import {
   DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
+  FilePptOutlined,
+  HomeOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
@@ -27,10 +26,10 @@ function getItem(label, key, icon, children) {
   };
 }
 const items = [
-  getItem(<Link to="/home">Home</Link>, '1', <PieChartOutlined />),
+  getItem(<Link to="/home">Home</Link>, '1', <HomeOutlined />),
   getItem(<Link to="/course">Course</Link>, '2', <DesktopOutlined />),
-  getItem(<Link to="/profile">Profile</Link>, '3', <TeamOutlined />),
-  getItem(<Link to="/pola">PoLA</Link>, '4', <FileOutlined />),
+  getItem(<Link to="/profile">Profile</Link>, '3', <UserOutlined />),
+  getItem(<Link to="/pola">PoLA</Link>, '4', <FilePptOutlined />),
 ];
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);

@@ -65,6 +65,7 @@ const Enroll = () => {
                           shape="round"
                           onClick={() => {
                             polaContext.setStore({
+                              ...polaContext.store,
                               enrolledCourses: [...enrolledCourses, courseName],
                             });
                           }}
