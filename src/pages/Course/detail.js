@@ -2,6 +2,7 @@ import { Tabs,Layout,Row,Col,Menu } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { Link, redirect, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import CommentList from '../../components/commentList';
 import courseData from '../../components/coursesData';
 import PolaContext from '../../components/context';
 import {React, Modal, useContext} from 'react';
@@ -205,12 +206,8 @@ const Discussion = (level) => {
                     </Col>
                 </Row>
             </Col>
-            <Col span={18}>
-                <img
-                    height= "100%"
-                    src={require('./assets/Discussion.jpg')}
-                    alt="Discussion"
-                ></img>
+            <Col span={18} style={{overflow:"auto", height:"560px"}}>
+                <CommentList></CommentList>
             </Col>
         </Row>
     )
