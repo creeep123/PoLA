@@ -1,4 +1,4 @@
-import { Avatar, List, Button, Tag } from 'antd';
+import { Avatar, List, Button, Tag, message } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,7 @@ const CourseList = () => {
   const handleDropCourse = (droppingCourseName) => {
     enrolledCourses.splice(enrolledCourses.indexOf(droppingCourseName),1)
     polaContext.setStore({
+      ...polaContext.store,
       enrolledCourses: [...enrolledCourses],
     });
   };
@@ -29,6 +30,7 @@ const CourseList = () => {
             <Button
               onClick={() => {
                 handleDropCourse(item.courseName);
+                message.success(`Dropped ${item.courseName} successfully!`)
               }}
               type="primary"
               shape="round"
@@ -37,9 +39,6 @@ const CourseList = () => {
                   ? null
                   : { display: 'none' }
               }
-              // disabled={enrolledCourses.includes(item.courseName)
-              //   ? false
-              //   : true}
               danger="true"
             >
               Drop
