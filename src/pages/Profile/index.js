@@ -1,11 +1,12 @@
-import { Layout, Button, Modal } from 'antd';
+import { Layout, Button, Modal, Divider, Radio, Typography } from 'antd';
 import { Col, Row } from 'antd';
 import React, { useState, useRef } from 'react';
-import { InboxOutlined, CameraOutlined } from '@ant-design/icons';
+import { InboxOutlined, CameraOutlined, CheckOutlined, HighlightOutlined, SmileFilled, SmileOutlined} from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import { Camera } from 'react-camera-pro';
 const { Dragger } = Upload;
 const { Header, Content, Footer, Sider } = Layout;
+const { Paragraph } = Typography;
 
 const props = {
   name: 'file',
@@ -56,6 +57,10 @@ const ProfilePage = () => {
   const handleCancel = () => {
     setOpen(false);
   };
+
+  const [editableStr, setEditableStr] = useState('Jack');
+  const [editableStr1, setEditableStr1] = useState('Jack@gmail.com');
+  const [editableStr2, setEditableStr2] = useState('Student');
 
   return (
     <Content
@@ -128,7 +133,14 @@ const ProfilePage = () => {
                 fontWeight: '700',
               }}
             >
-              <p>Name: Jack</p>
+              <p>Name:&nbsp;&nbsp;&nbsp;</p>
+               <Paragraph
+                editable={{
+                onChange: setEditableStr,
+                }}
+               >
+                {editableStr}
+               </Paragraph>
             </Row>
             <Row
               style={{
@@ -138,7 +150,7 @@ const ProfilePage = () => {
                 fontWeight: '700',
               }}
             >
-              <p>Id: 123456</p>
+              <p>Address:&nbsp;&nbsp;&nbsp;0x4Be9933b776d2DAd8332b3DBC63Da698E3e333d4</p>
             </Row>
             <Row
               style={{
@@ -148,7 +160,31 @@ const ProfilePage = () => {
                 fontWeight: '700',
               }}
             >
-              <p>Email: Jack@gmail.com</p>
+              <p>Email:&nbsp;&nbsp;&nbsp;</p>
+              <Paragraph
+                editable={{
+                onChange: setEditableStr1,
+                }}
+               >
+                {editableStr1}
+              </Paragraph>
+            </Row>
+             <Row
+              style={{
+                marginTop: '40px',
+                marginLeft: '40px',
+                fontSize: '20px',
+                fontWeight: '700',
+              }}
+            >
+              <p>Role:&nbsp;&nbsp;&nbsp;</p>
+               <Paragraph
+                editable={{
+                onChange: setEditableStr2,
+                }}
+               >
+                {editableStr2}
+              </Paragraph>
             </Row>
           </Col>
         </Row>
