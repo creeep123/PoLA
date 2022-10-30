@@ -106,12 +106,12 @@ const Home = () => {
             </Row>
             <Row style={{ marginTop: '16px' }}>
               <Col span={24} className="pola-title">
-                Popular Courses ////// Current Role is: {role}
+                Popular Courses
               </Col>
             </Row>
             <Row>
               <Col span={24}>
-                <CourseList></CourseList>
+                <CourseList listType={"popular"}></CourseList>
               </Col>
             </Row>
           </Col>

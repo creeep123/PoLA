@@ -3,10 +3,14 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PolaContext from '../components/context';
 
-const CourseList = () => {
+const CourseList = (props) => {
+  const { listType } = props;
   const polaContext = useContext(PolaContext);
-  const { enrolledCourses, allCourses } = polaContext.store;
+  const { enrolledCourses, publishedCourses, allCourses, userName } =
+    polaContext.store;
   const data = allCourses;
+  const courseListData =
+    listType === 'published' ? publishedCourses : enrolledCourses;
 
   const handleDropCourse = (droppingCourseName) => {
     enrolledCourses.splice(enrolledCourses.indexOf(droppingCourseName), 1);
@@ -16,6 +20,33 @@ const CourseList = () => {
     });
   };
 
+  const handleCloseCourse = (droppingCourseName) => {
+    publishedCourses.splice(courseListData.indexOf(droppingCourseName), 1);
+    polaContext.setStore({
+      ...polaContext.store,
+      publishedCourses: [...publishedCourses],
+    });
+  };
+
+  const constDangerButtonDisplay = (curCourseName) => {
+    if(listType === 'popular'){
+      return { display: 'none' };
+    }else if (listType === 'enrolled') {
+      return courseListData.includes(curCourseName) ? null : { display: 'none' };
+    }
+  };
+  const listItemDisplay = (curCourseName) => {
+    console.log('listType :>> ', listType);
+    console.log('courseListData :>> ', courseListData);
+    if (listType === 'popular') {
+      return null;
+    } else {
+      return courseListData.includes(curCourseName)
+        ? null
+        : { display: 'none' };
+    }
+  };
+
   return (
     <List
       style={{ overflow: 'auto', height: '330px' }}
@@ -23,23 +54,25 @@ const CourseList = () => {
       dataSource={data}
       renderItem={(item) => (
         <List.Item
+          style={listItemDisplay(item.courseName)}
           className="course-item-style"
           actions={[
             <Button
               onClick={() => {
-                handleDropCourse(item.courseName);
-                message.success(`Dropped ${item.courseName} successfully!`);
+                if (listType === 'enrolled') {
+                  handleDropCourse(item.courseName);
+                  message.success(`Dropped ${item.courseName} successfully!`);
+                } else {
+                  handleCloseCourse(item.courseName);
+                  message.success(`Closed ${item.courseName} successfully!`);
+                }
               }}
               type="primary"
               shape="round"
-              style={
-                enrolledCourses.includes(item.courseName)
-                  ? null
-                  : { display: 'none' }
-              }
+              style={constDangerButtonDisplay(item.courseName)}
               danger="true"
             >
-              Drop
+              {listType === 'enrolled' ? 'Drop' : 'Close'}
             </Button>,
             <Link to={`/course/enroll/${item.courseName}`}>
               <Button type="primary" shape="round">

@@ -10,7 +10,8 @@ const Course = () => {
   const [description, setDescription] = useState('');
   const [newCourseName, setNewCourseName] = useState('');
   const polaContext = useContext(PolaContext);
-  const { role, allCourses } = polaContext.store;
+  const { role, allCourses, publishedCourses } = polaContext.store;
+  const listType = role === 'student' ? 'enrolled' : 'published';
 
   const handlePublish = () => {
     polaContext.setStore({
@@ -19,6 +20,7 @@ const Course = () => {
         ...allCourses,
         { courseName: newCourseName, teacher: 'Mark Zuckerberg' },
       ],
+      publishedCourses: [...publishedCourses, newCourseName],
     });
     message.success(`Publish ${newCourseName} Successfully`);
     setNewCourseName('');
@@ -46,7 +48,7 @@ const Course = () => {
           </Row>
           <Row>
             <Col span={14}>
-              <CourseList></CourseList>
+              <CourseList listType={listType}></CourseList>
             </Col>
             <Col
               span={10}

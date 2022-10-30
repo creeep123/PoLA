@@ -15,6 +15,7 @@ const value = {
   role: 'student',
   allCourses: courseData,
   enrolledCourses: [],
+  publishedCourses:[],
   points:27
 };
 

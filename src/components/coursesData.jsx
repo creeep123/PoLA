@@ -1,5 +1,5 @@
 const courseData = [
-  { courseName: 'Design Thinking', teacher: 'Alan Walker' },
+  { courseName: 'Design Thinking', teacher: 'Mark Zuckerberg' },
   { courseName: 'Analog photography', teacher: 'Dave Chappelle' },
   { courseName: 'Master Instagram', teacher: 'Stephen Shore' },
   { courseName: 'Appreciation of Film Art', teacher: 'Christopher Nolan' },

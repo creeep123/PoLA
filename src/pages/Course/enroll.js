@@ -68,6 +68,9 @@ const Enroll = () => {
                               ...polaContext.store,
                               enrolledCourses: [...enrolledCourses, courseName],
                             });
+                            if(!enrolledCourses.includes(courseName)){
+                              message.success(`Enrolled ${courseName} successfully!`)
+                            }
                           }}
                         >
                           {enrolledCourses.includes(courseName)
