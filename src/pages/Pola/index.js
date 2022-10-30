@@ -9,9 +9,10 @@ import {
   message,
   Tag,
 } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Collapse } from 'antd';
 import { Link } from 'react-router-dom';
+import PolaContext from '../../components/context';
 const { Header, Content, Footer, Sider } = Layout;
 const { Panel } = Collapse;
 const text = `
@@ -22,6 +23,9 @@ const text = `
 const levels = ['a', 'b', 'c'];
 
 const PolaPage = () => {
+  const polaContext = useContext(PolaContext);
+  const { points } = polaContext.store;
+
   const onChange = (key) => {
     console.log(key);
   };
@@ -62,8 +66,12 @@ const PolaPage = () => {
   };
 
   const handleRedeem = () => {
-    message.success('Redeem Success, points -20');
+    message.success('Redeem Success, points -10');
     setRedeemed(true);
+    polaContext.setStore({
+      ...polaContext.store,
+      points: points-10
+    })
   };
 
   const renderRedeemPolaItem = (level, redeemable = true, mkey = 999) => {
@@ -117,14 +125,7 @@ const PolaPage = () => {
 
     return (
       <Collapse defaultActiveKey={['1']} onChange={onChange}>
-        <Panel
-          header={
-            redeemed
-              ? renderTabHeader('Design Thinking', '7')
-              : renderTabHeader('Design Thinking', '27')
-          }
-          key="1"
-        >
+        <Panel header={renderTabHeader('Design Thinking', points)} key="1">
           <div style={{ display: 'flex' }}>
             {renderRedeemPolaItem('c', false)}
             {renderRedeemPolaItem('b', !redeemed)}

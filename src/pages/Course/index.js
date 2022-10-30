@@ -50,39 +50,43 @@ const Course = () => {
             <Col span={14}>
               <CourseList listType={listType}></CourseList>
             </Col>
-            <Col
-              span={10}
-              style={{ display: 'flex', justifyContent: 'center' }}
-            >
-              <Row justify="space-around">
-                <Col span={20}>Publish New Course</Col>
-                <Col span={20}>
-                  <Form layout="vertical">
-                    <Form.Item label="1. Please put in the new course name.">
-                      <Input
-                        onChange={(event) =>
-                          setNewCourseName(event.target.value)
-                        }
-                        value={newCourseName}
-                      />
-                    </Form.Item>
-                    <Form.Item label="2. Please put in the description.">
-                      <TextArea
-                        rows={6}
-                        cols={1200}
-                        onChange={(event) => setDescription(event.target.value)}
-                        value={description}
-                      />
-                    </Form.Item>
-                    <Form.Item>
-                      <Button type="primary" onClick={handlePublish}>
-                        Publish
-                      </Button>
-                    </Form.Item>
-                  </Form>
-                </Col>
-              </Row>
-            </Col>
+            {role === 'teacher' ? (
+              <Col
+                span={10}
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
+                <Row justify="space-around">
+                  <Col span={20}>Publish New Course</Col>
+                  <Col span={20}>
+                    <Form layout="vertical">
+                      <Form.Item label="1. Please put in the new course name.">
+                        <Input
+                          onChange={(event) =>
+                            setNewCourseName(event.target.value)
+                          }
+                          value={newCourseName}
+                        />
+                      </Form.Item>
+                      <Form.Item label="2. Please put in the description.">
+                        <TextArea
+                          rows={6}
+                          cols={1200}
+                          onChange={(event) =>
+                            setDescription(event.target.value)
+                          }
+                          value={description}
+                        />
+                      </Form.Item>
+                      <Form.Item>
+                        <Button type="primary" onClick={handlePublish}>
+                          Publish
+                        </Button>
+                      </Form.Item>
+                    </Form>
+                  </Col>
+                </Row>
+              </Col>
+            ) : null}
           </Row>
         </Col>
       </div>

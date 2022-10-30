@@ -7,7 +7,7 @@ import PolaContext from '../../components/context';
 const { Header, Footer, Sider, Content } = Layout;
 const Enroll = () => {
   const polaContext = useContext(PolaContext);
-  const { enrolledCourses } = polaContext.store;
+  const { enrolledCourses, userName } = polaContext.store;
 
   const { courseName } = useParams();
   const currentCourseData = courseData.filter(
@@ -59,7 +59,7 @@ const Enroll = () => {
                         <Tag>User Research</Tag>
                       </p>
                       <p>&nbsp;</p>
-                      <Link to= {`/course/detail/${courseName}`}>
+                      <Link to={`/course/detail/${courseName}`}>
                         <Button
                           type="primary"
                           shape="round"
@@ -68,12 +68,15 @@ const Enroll = () => {
                               ...polaContext.store,
                               enrolledCourses: [...enrolledCourses, courseName],
                             });
-                            if(!enrolledCourses.includes(courseName)){
-                              message.success(`Enrolled ${courseName} successfully!`)
+                            if (userName !== 'Mark Zuckerberg' && !enrolledCourses.includes(courseName)) {
+                              message.success(
+                                `Enrolled ${courseName} successfully!`
+                              );
                             }
                           }}
                         >
-                          {enrolledCourses.includes(courseName)
+                          {enrolledCourses.includes(courseName) ||
+                          userName === 'Mark Zuckerberg'
                             ? 'View Course'
                             : 'Enroll'}
                         </Button>

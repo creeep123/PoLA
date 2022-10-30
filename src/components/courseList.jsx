@@ -86,7 +86,7 @@ const CourseList = (props) => {
             title={
               <Link to={`/course/enroll/${item.courseName}`}>
                 {item.courseName}&nbsp;&nbsp;
-                {enrolledCourses.includes(item.courseName) ? (
+                {listType==="enrolled" && enrolledCourses.includes(item.courseName) ? (
                   <Tag color={'gray'}>Enrolled</Tag>
                 ) : (
                   ''

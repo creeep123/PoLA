@@ -1,11 +1,12 @@
 import { Card, Button, Layout, Avatar } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Upload, Tabs, Row, Col } from 'antd';
+import { Upload, Tabs, Row, Col, Typography } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 const { Meta } = Card;
 const { Dragger } = Upload;
 const { Header, Content, Footer, Sider } = Layout;
+const { Paragraph, Text } = Typography;
 
 const PolaDetailPage = () => {
   const renderPolaDetail = () => {
@@ -34,6 +35,7 @@ const PolaDetailPage = () => {
           <Col span={12}>
             <Card
               hoverable
+              className='pola-card'
               style={{
                 borderRadius: '14px',
                 width: 480,
@@ -56,6 +58,46 @@ const PolaDetailPage = () => {
               <p>Start: 2022/07/02</p>
               <p>Finish: 2022/10/01</p>
               <p>Level: C</p>
+              <p>
+              Address:
+                <Text
+                Contract
+                  style={{ width: 300 }}
+                  ellipsis={{ tooltip: '0x23fe518d244fc03531af764bae0839a90fd1cbb03528' }}
+                >
+                  0x23fe518d244fc03531af764bae0839a90fd1cbb03528
+                </Text>
+              </p>
+              <p>
+              Token ID:
+                <Text
+                Contract
+                  style={{ width: 300 }}
+                  ellipsis={{ tooltip: '3528' }}
+                >
+                  3528
+                </Text>
+              </p>
+              <p>
+              Token Standard:
+                <Text
+                Contract
+                  style={{ width: 300 }}
+                  ellipsis={{ tooltip: 'ERC-721' }}
+                >
+                  ERC-721
+                </Text>
+              </p>
+              <p>
+              Chain:
+                <Text
+                Contract
+                  style={{ width: 300 }}
+                  ellipsis={{ tooltip: 'Ethereum' }}
+                >
+                  Ethereum
+                </Text>
+              </p>
             </Card>
           </Col>
         </Row>
