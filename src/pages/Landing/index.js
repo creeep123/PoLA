@@ -34,14 +34,20 @@ const Landing = () => {
       console.log('Your wallet address:' + myAccount);
       setWalletAddress(myAccount);
       setConnected(true);
-      polaContext.setStore({
+      const newStore = myAccount === '0x4Be9933b776d2DAd8332b3DBC63Da698E3e333d4'?{
         ...polaContext.store,
+        userName:"Jack",
+        userEmail:"Jack@gmail.com",
         address: myAccount,
-        role:
-          myAccount === '0x4Be9933b776d2DAd8332b3DBC63Da698E3e333d4'
-            ? 'student'
-            : 'teacher',
-      });
+        role:'student'
+      }:{
+        ...polaContext.store,
+        userName:"Mark Zuckerberg",
+        userEmail:"Mark@hotmail.com",
+        address: myAccount,
+        role:'teacher'
+      }
+      polaContext.setStore(newStore);
       message.success('Wallet Connected Successfully');
       // 返回指定地址账户的余额
       // var balance = await web3.eth.getBalance(myAccount);

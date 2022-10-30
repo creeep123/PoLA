@@ -1,17 +1,15 @@
 import { Avatar, List, Button, Tag, message } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import courseData from './coursesData';
 import PolaContext from '../components/context';
 
-const data = courseData;
 const CourseList = () => {
   const polaContext = useContext(PolaContext);
-  const { enrolledCourses } = polaContext.store;
+  const { enrolledCourses, allCourses } = polaContext.store;
+  const data = allCourses;
 
   const handleDropCourse = (droppingCourseName) => {
-    enrolledCourses.splice(enrolledCourses.indexOf(droppingCourseName),1)
+    enrolledCourses.splice(enrolledCourses.indexOf(droppingCourseName), 1);
     polaContext.setStore({
       ...polaContext.store,
       enrolledCourses: [...enrolledCourses],
@@ -30,7 +28,7 @@ const CourseList = () => {
             <Button
               onClick={() => {
                 handleDropCourse(item.courseName);
-                message.success(`Dropped ${item.courseName} successfully!`)
+                message.success(`Dropped ${item.courseName} successfully!`);
               }}
               type="primary"
               shape="round"

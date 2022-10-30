@@ -53,14 +53,22 @@ const App = () => {
     <Layout
       style={{
         minHeight: '100vh',
+        background:"#ffffff"
       }}
     >
       <Sider
+        className='pola-sider'
         theme="dark"
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <div className="logo" />
+        <br/>
         <Menu
           theme="dark"
           defaultSelectedKeys={['1']}

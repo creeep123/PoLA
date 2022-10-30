@@ -8,13 +8,15 @@ import React, { useContext, useState } from 'react';
 import PolaContext from '../../components/context';
 import { Link } from 'react-router-dom';
 import courseData from '../../components/coursesData';
+import JackHeader from './assets/HEADER.png';
+import MarkHeader from './assets/HEADER-Mark.png';
 const { Content } = Layout;
 const { Option } = Select;
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [searchCourse, setSearchCourse] = useState("")
+  const [searchCourse, setSearchCourse] = useState('');
   const [open, setOpen] = useState(false);
   const showModal = () => {
     setOpen(true);
@@ -43,7 +45,7 @@ const Home = () => {
         <div style={{ display: 'flex' }}>
           <Select
             onChange={(key) => {
-              setSearchCourse(key)
+              setSearchCourse(key);
               showModal();
             }}
             size="large"
@@ -75,7 +77,7 @@ const Home = () => {
   };
 
   const polaContext = useContext(PolaContext);
-  const { role, address } = polaContext.store;
+  const { role, address, userName } = polaContext.store;
 
   return (
     <Content
@@ -97,7 +99,7 @@ const Home = () => {
               <Col span={24}>
                 <img
                   width="100%"
-                  src={require('./assets/HEADER.png')}
+                  src={userName === 'Jack' ? JackHeader : MarkHeader}
                   alt="Girl in a jacket"
                 ></img>
               </Col>

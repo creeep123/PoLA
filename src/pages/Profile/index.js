@@ -1,12 +1,20 @@
 import { Layout, Button, Modal, Divider, Radio, Typography } from 'antd';
 import { Col, Row } from 'antd';
-import React, { useState, useRef } from 'react';
-import { InboxOutlined, CameraOutlined, CheckOutlined, HighlightOutlined, SmileFilled, SmileOutlined} from '@ant-design/icons';
+import React, { useState, useRef, useContext } from 'react';
+import PolaContext from '../../components/context';
+import {
+  InboxOutlined,
+  CameraOutlined,
+  CheckOutlined,
+  HighlightOutlined,
+  SmileFilled,
+  SmileOutlined,
+} from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import { Camera } from 'react-camera-pro';
 const { Dragger } = Upload;
 const { Header, Content, Footer, Sider } = Layout;
-const { Paragraph } = Typography;
+const { Paragraph, Text } = Typography;
 
 const props = {
   name: 'file',
@@ -30,6 +38,9 @@ const props = {
 };
 
 const ProfilePage = () => {
+  const polaContext = useContext(PolaContext);
+  const { role, address, userName, userEmail } = polaContext.store;
+
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -58,14 +69,17 @@ const ProfilePage = () => {
     setOpen(false);
   };
 
-  const [editableStr, setEditableStr] = useState('Jack');
-  const [editableStr1, setEditableStr1] = useState('Jack@gmail.com');
-  const [editableStr2, setEditableStr2] = useState('Student');
+  const [editableStr, setEditableStr] = useState(userName);
+  const [editableStr1, setEditableStr1] = useState(userEmail);
+  const [editableStr2, setEditableStr2] = useState(role);
+  const [editableStr3, setEditableStr3] = useState(address);
 
   return (
     <Content
       style={{
         margin: '0 16px',
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <div
@@ -134,13 +148,13 @@ const ProfilePage = () => {
               }}
             >
               <p>Name:&nbsp;&nbsp;&nbsp;</p>
-               <Paragraph
+              <Paragraph
                 editable={{
-                onChange: setEditableStr,
+                  onChange: setEditableStr,
                 }}
-               >
+              >
                 {editableStr}
-               </Paragraph>
+              </Paragraph>
             </Row>
             <Row
               style={{
@@ -150,7 +164,16 @@ const ProfilePage = () => {
                 fontWeight: '700',
               }}
             >
-              <p>Address:&nbsp;&nbsp;&nbsp;0x4Be9933b776d2DAd8332b3DBC63Da698E3e333d4</p>
+              <Paragraph
+                editable={false}
+              >
+                <Text
+                  style={{ width: 300 }}
+                  ellipsis={{ tooltip: { editableStr3 } }}
+                >
+                  Address:&nbsp;&nbsp;&nbsp;{editableStr3}
+                </Text>
+              </Paragraph>
             </Row>
             <Row
               style={{
@@ -163,13 +186,13 @@ const ProfilePage = () => {
               <p>Email:&nbsp;&nbsp;&nbsp;</p>
               <Paragraph
                 editable={{
-                onChange: setEditableStr1,
+                  onChange: setEditableStr1,
                 }}
-               >
+              >
                 {editableStr1}
               </Paragraph>
             </Row>
-             <Row
+            <Row
               style={{
                 marginTop: '40px',
                 marginLeft: '40px',
@@ -178,11 +201,9 @@ const ProfilePage = () => {
               }}
             >
               <p>Role:&nbsp;&nbsp;&nbsp;</p>
-               <Paragraph
-                editable={{
-                onChange: setEditableStr2,
-                }}
-               >
+              <Paragraph
+                editable={false}
+              >
                 {editableStr2}
               </Paragraph>
             </Row>
@@ -264,7 +285,7 @@ const ProfilePage = () => {
             <div className="camera-video">
               <Camera ref={camera} />
             </div>
-            <Row justify="center" marginTop={"16px"} marginBottom={"16px"}>
+            <Row justify="center" marginTop={'16px'} marginBottom={'16px'}>
               <Button
                 type="primary"
                 onClick={() => setImage(camera.current.takePhoto())}
@@ -273,7 +294,7 @@ const ProfilePage = () => {
                 Take photo
               </Button>
             </Row>
-            <Row justify="center" marginTop={"16px"}>
+            <Row justify="center" marginTop={'16px'}>
               <img style={{ width: '150px' }} src={image} />
             </Row>
           </>
