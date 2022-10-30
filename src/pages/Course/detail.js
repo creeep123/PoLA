@@ -37,6 +37,7 @@ const onChange = (key) => {
 };
 
 const Lecture = (level) => {
+  const { courseName } = useParams();
   const polaContext = useContext(PolaContext);
   const { role, address } = polaContext.store;
   const [items, setItem] = useState([
@@ -81,7 +82,7 @@ const Lecture = (level) => {
               alt="courseicon"
             ></img>
           </Col>
-          <Col span={24}>Design Thinking</Col>
+          <Col span={24}>{courseName}</Col>
           <Col span={24}>
             <Menu
               onClick={onClick}
