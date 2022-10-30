@@ -11,11 +11,18 @@ import Exam1 from './subPages/exam1';
 import CommentList1 from './subPages/commentList1';
 import CommentList2 from './subPages/commentList2';
 import CommentList3 from './subPages/commentList3';
+import Information1 from './subPages/information1';
+import Information2 from './subPages/information2';
+import Information3 from './subPages/information3';
+import Grading1 from './subPages/grading1';
+import Grading2 from './subPages/grading2';
+import Grading3 from './subPages/grading3';
 import courseData from '../../components/coursesData';
 import PolaContext from '../../components/context';
 import { React, Modal, useContext, useState } from 'react';
 import { InboxOutlined, CameraOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
+
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -214,47 +221,235 @@ const Discussion = (level) => {
   );
 };
 
+const Information = (level) => {
+    const polaContext = useContext(PolaContext);
+    const { role, address } = polaContext.store;
+    const [items, setItem] = useState([getItem('Assignment1','1'), getItem('Assignment2','2')]);
+    const [current,setCurrent] = useState('1');
+    const onClick = (e) => {
+        console.log('click ', e);
+        setCurrent(e.key);
+    };
+    const [TaskName, setTaskName] = useState('Exam1');
+    const [Description, setDescription] = useState("It is our first exam.");
+
+    const handleSubmit = event => {
+        message.success('Submited Successfully');
+        setItem( items => [...items, getItem('Exam1','3')]);
+        event.preventDefault(); // 👈️ prevent page refresh
+
+        // 👇️ clear all input values in the form
+        setTaskName('');
+        setDescription('');
+    };
+    let detailInformation;
+    if (current=='1'){
+        detailInformation = <Information1></Information1>;
+    } else if (current=='2'){
+        detailInformation = <Information2></Information2>;
+    } else if (current=='3'){
+        detailInformation = <Information3></Information3>;
+    }
+    return(
+        <Row>
+            <Col span={5}>
+                <Row>
+                    <Col span={24}>
+                    <img
+                    width= "25%"
+                    src={require('./assets/courseicon.jpg')}
+                    alt="courseicon"
+                    ></img>
+                    </Col>
+                    <Col span={24}>
+                        Design Thinking
+                    </Col>
+                    <Col span={24}>
+                    <Menu
+                        onClick={onClick}
+                        style={{
+                            width: 256,
+                        }}
+                        defaultSelectedKeys={['1']}
+                        defaultOpenKeys={['sub1']}
+                        mode="inline"
+                        items={items}
+                    />
+                    </Col>
+                </Row>
+            </Col>
+            <Col span={13}>
+                {detailInformation}
+            </Col>
+            <Col span={6}>
+                <Row justify='space-around'>
+                    <Col span={20}>
+                        Upload Task Information
+                    </Col>
+                    <Col span={20}>
+                    <Form
+                        layout="vertical"
+                    >
+                        <Form.Item label="1. Please put in the task name.">
+                            <Input 
+                                onChange={event => setTaskName(event.target.value)}
+                                value={TaskName}
+                            />
+                        </Form.Item>
+                        <Form.Item label="2. Please put in the description.">
+                            <TextArea 
+                                rows={6} 
+                                cols={1200}
+                                onChange={event => setDescription(event.target.value)}
+                                value={Description}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" onClick={handleSubmit}>
+                                Submit
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
+    )
+}
+
+const Grading = (level) => {
+    const [Grade, setGrade] = useState('');
+
+    const handleSubmit = event => {
+        message.success('Submited Successfully');
+        event.preventDefault(); // 👈️ prevent page refresh
+
+        // 👇️ clear all input values in the form
+        setGrade('');
+    };
+    const items = [
+        getItem('Student 1', '1'),
+        getItem('Student 2', '2'),
+        getItem('Student 3', '3'),
+    ];
+    const [current,setCurrent] = useState('1');
+    const onClick = (e) => {
+        console.log('click ', e);
+        setCurrent(e.key);
+    };
+    let detailGrading;
+    if (current=='1'){
+        detailGrading = <Grading1></Grading1>;
+    } else if (current=='2'){
+        detailGrading = <Grading2></Grading2>;
+    } else if (current=='3'){
+        detailGrading = <Grading3></Grading3>;
+    }
+    return(
+        <Row>
+            <Col span={5}>
+                <Row>
+                    <Col span={24}>
+                        Assignments
+                    </Col>
+                    <Col span={24}>
+                    <Menu
+                        onClick={onClick}
+                        style={{
+                            width: 256,
+                        }}
+                        defaultSelectedKeys={['1']}
+                        defaultOpenKeys={['sub1']}
+                        mode="inline"
+                        items={items}
+                    />
+                    </Col>
+                </Row>
+            </Col>
+            <Col span={13}>
+                {detailGrading}
+            </Col>
+            <Col span={6}>
+                <Row justify='space-around'>
+                    <Col span={20}>
+                        Grading
+                    </Col>
+                    <Col span={20}>
+                    <Form
+                        layout="vertical"
+                    >
+                        <Form.Item label="Please put in the point.">
+                            <Input 
+                                onChange={event => setGrade(event.target.value)}
+                                value={Grade}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" onClick={handleSubmit}>
+                                Submit
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
+    )
+}
+
+
 const Detail = () => {
-  return (
-    <Layout>
-      <Content
-        style={{
-          margin: '0 16px',
-          height: '100vh',
-        }}
-      >
-        <div
-          className="site-layout-background"
-          style={{
-            padding: 24,
-            minHeight: 360,
-          }}
-        >
-          <Tabs
-            defaultActiveKey="1"
-            onChange={onChange}
-            items={[
-              {
-                label: `Leture`,
-                key: '1',
-                children: Lecture(),
-              },
-              {
-                label: `Assignment`,
-                key: '2',
-                children: Assignment(),
-              },
-              {
-                label: `Discussion`,
-                key: '3',
-                children: Discussion(),
-              },
-            ]}
-          />
-        </div>
-      </Content>
-    </Layout>
-  );
+    return(
+        <Layout>
+          <Content
+            style={{
+            margin: '0 16px',
+            height: '100vh',
+          }}>
+          <div
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              minHeight: 360,
+            }}
+          >
+            <Tabs
+                defaultActiveKey="1"
+                onChange={onChange}
+                items={[
+                {
+                    label: `Leture`,
+                    key: '1',
+                    children: Lecture(),
+                },
+                {
+                    label: `Assignment`,
+                    key: '2',
+                    children: Assignment(),
+                },
+                {
+                    label: `Discussion`,
+                    key: '3',
+                    children: Discussion(),
+                },
+                {
+                    label: `Information`,
+                    key: '4',
+                    children: Information(),
+                    
+                },
+                {
+                    label: `Grading`,
+                    key: '5',
+                    children: Grading(),
+                },
+                ]}
+            />
+          </div>
+          </Content>
+        </Layout>
+    )
+  
 };
 
 export default Detail;
