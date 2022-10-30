@@ -53,7 +53,7 @@ const PolaDetailPage = () => {
               <Meta
                 title={`Design Thinking`}
                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                description="by Alan Walker"
+                description="by Walter Heisenberg"
               />
               <p>Start: 2022/07/02</p>
               <p>Finish: 2022/10/01</p>

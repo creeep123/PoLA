@@ -11,6 +11,7 @@ const CourseList = (props) => {
   const data = allCourses;
   const courseListData =
     listType === 'published' ? publishedCourses : enrolledCourses;
+  // const courseListData = allCourses
 
   const handleDropCourse = (droppingCourseName) => {
     enrolledCourses.splice(enrolledCourses.indexOf(droppingCourseName), 1);
