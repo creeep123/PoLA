@@ -45,11 +45,25 @@ const ProfilePage = () => {
   const [open, setOpen] = useState(false);
 
   const [success, setSuccess] = useState(false);
-
   // Camera Related Starts
   const camera = useRef(null);
   const [image, setImage] = useState(null);
   const [useCamera, setUseCamera] = useState(false);
+
+  var submitNum = 0;
+  var imgPath = "./assets/successPic.png";
+
+  const changeImg = () => {
+    if(submitNum == 0){
+    imgPath = "./assets/successPic.png";
+    }
+    if(submitNum == 1){
+    imgPath = "./assets/successPic.png";
+    }
+    if(submitNum == 2){
+    imgPath = "./assets/takePhotoPic.jpg";
+    }
+  };
 
   const showModal = () => {
     setOpen(true);
@@ -57,6 +71,7 @@ const ProfilePage = () => {
   // Camera Related Ends
 
   const handleOk = () => {
+    submitNum ++;
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -101,11 +116,7 @@ const ProfilePage = () => {
               <Col span={20}>
                 <img
                   width="80%"
-                  src={
-                    success
-                      ? require('./assets/successPic.png')
-                      : require('./assets/defultPic.png')
-                  }
+                  src={imgPath}
                   alt="DefaultPic"
                   style={{
                     marginTop: '65px',
