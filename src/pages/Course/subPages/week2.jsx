@@ -8,7 +8,7 @@ function Week2() {
             <Col span={24}>
                     <ReactPlayer
                         className='react-player'
-                        url='https://www.youtube.com/watch?v=1BcHFGhzgfA'
+                        url='https://youtu.be/L3LMbpZIKhQ'
                         width='100%'
                         playing={false}
                         controls
