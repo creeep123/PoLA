@@ -16,7 +16,7 @@ const value = {
   allCourses: courseData,
   enrolledCourses: [],
   publishedCourses:[],
-  points:27
+  points:0
 };
 
 const ContextWrapper = () => {
