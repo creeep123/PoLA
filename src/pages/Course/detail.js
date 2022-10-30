@@ -281,6 +281,7 @@ const Information = (level) => {
             <Col span={13}>
                 {detailInformation}
             </Col>
+            {role === 'teacher' ? (
             <Col span={6}>
                 <Row justify='space-around'>
                     <Col span={20}>
@@ -313,6 +314,7 @@ const Information = (level) => {
                     </Col>
                 </Row>
             </Col>
+            ) : null}
         </Row>
     )
 }
@@ -399,6 +401,8 @@ const Grading = (level) => {
 
 
 const Detail = () => {
+    const polaContext = useContext(PolaContext);
+    const { role, address } = polaContext.store;
     return(
         <Layout>
           <Content
@@ -423,7 +427,7 @@ const Detail = () => {
                     children: Lecture(),
                 },
                 {
-                    label: `Assignment`,
+                    label: (role === 'student' ? 'Assignment' : ''),
                     key: '2',
                     children: Assignment(),
                 },
@@ -439,7 +443,7 @@ const Detail = () => {
                     
                 },
                 {
-                    label: `Grading`,
+                    label: (role === 'teacher' ? 'Grading' : ''),
                     key: '5',
                     children: Grading(),
                 },
