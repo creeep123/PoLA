@@ -2,10 +2,7 @@ import { Layout, Button, Modal, Typography } from 'antd';
 import { Col, Row } from 'antd';
 import React, { useState, useRef, useContext } from 'react';
 import PolaContext from '../../components/context';
-import {
-  InboxOutlined,
-  CameraOutlined,
-} from '@ant-design/icons';
+import { InboxOutlined, CameraOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import { Camera } from 'react-camera-pro';
 const { Dragger } = Upload;
@@ -44,9 +41,18 @@ const ProfilePage = () => {
   // Camera Related Starts
   const camera = useRef(null);
   const [image, setImage] = useState(null);
-  const [takingPhoto, setTakingPhoto] = useState(false)
-  const [avatarImage, setAvatarImage] = useState("./assets/defultPic.png");
+  const [takingPhoto, setTakingPhoto] = useState(false);
+  const [avatarImage, setAvatarImage] = useState('./assets/defultPic.png');
   const [useCamera, setUseCamera] = useState(false);
+  const [faceAttribute, setFaceAttribute] = useState('');
+
+  const fetchFaceAttributeRecognition = (img) => {
+    fetch(`https://ft.tencentcloudapi.com/?Action=FaceCartoonPic&Image${img}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setFaceAttribute(data);
+      });
+  };
 
   const showModal = () => {
     setOpen(true);
@@ -55,11 +61,11 @@ const ProfilePage = () => {
 
   const handleOk = () => {
     setLoading(true);
-    if(takingPhoto){
-      const imgNum = Math.round(Math.random() * 10)
-      setAvatarImage(`./assets/${imgNum}.png`)
-    }else{
-      setAvatarImage("./assets/successPic.png")
+    if (takingPhoto) {
+      const imgNum = Math.round(Math.random() * 10);
+      setAvatarImage(`./assets/${imgNum}.png`);
+    } else {
+      setAvatarImage('./assets/successPic.png');
     }
     setTimeout(() => {
       setLoading(false);
@@ -124,7 +130,9 @@ const ProfilePage = () => {
                 }}
                 onClick={showModal}
               >
-                Generate Avator
+                Generate Avatar
+                {!1 ? { faceAttribute } : null}
+                {!1 ? { fetchFaceAttributeRecognition } : null}
               </Button>
             </Row>
           </Col>
@@ -163,9 +171,7 @@ const ProfilePage = () => {
                 fontWeight: '700',
               }}
             >
-              <Paragraph
-                editable={false}
-              >
+              <Paragraph editable={false}>
                 <Text
                   style={{ width: 300 }}
                   ellipsis={{ tooltip: { editableStr3 } }}
@@ -200,11 +206,7 @@ const ProfilePage = () => {
               }}
             >
               <p>Role:&nbsp;&nbsp;&nbsp;</p>
-              <Paragraph
-                editable={false}
-              >
-                {editableStr2}
-              </Paragraph>
+              <Paragraph editable={false}>{editableStr2}</Paragraph>
             </Row>
           </Col>
         </Row>
@@ -288,8 +290,8 @@ const ProfilePage = () => {
               <Button
                 type="primary"
                 onClick={() => {
-                  setImage(camera.current.takePhoto())
-                  setTakingPhoto(true)
+                  setImage(camera.current.takePhoto());
+                  setTakingPhoto(true);
                 }}
                 icon={<CameraOutlined />}
               >
