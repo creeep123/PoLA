@@ -14,12 +14,16 @@ const Course = () => {
   const listType = role === 'student' ? 'enrolled' : 'published';
 
   const handlePublish = () => {
+    allCourses.push({
+      courseName: 'Build Facebook',
+      teacher: 'Mark Zuckerberg',
+    });
     polaContext.setStore({
       ...polaContext.store,
-      allCourses: [
-        ...allCourses,
-        { courseName: newCourseName, teacher: 'Mark Zuckerberg' },
-      ],
+      // allCourses: [
+      //   ...allCourses,
+      //   { courseName: newCourseName, teacher: 'Mark Zuckerberg' },
+      // ],
       publishedCourses: [...publishedCourses, newCourseName],
     });
     message.success(`Publish ${newCourseName} Successfully`);

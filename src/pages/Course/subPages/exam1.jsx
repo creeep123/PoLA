@@ -28,10 +28,10 @@ function Exam1() {
   const handleSubmit = (event) => {
     polaContext.setStore({
       ...polaContext.store,
-      points: points + 5,
+      points: points + 10,
     });
 
-    message.success('Submited Successfully Points +5');
+    message.success('Submited Successfully Points +10');
     event.preventDefault(); // 👈️ prevent page refresh
 
     // 👇️ clear all input values in the form

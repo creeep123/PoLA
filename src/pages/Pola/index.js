@@ -127,8 +127,8 @@ const PolaPage = () => {
       <Collapse defaultActiveKey={['1']} onChange={onChange}>
         <Panel header={renderTabHeader('Design Thinking', points)} key="1">
           <div style={{ display: 'flex' }}>
-            {renderRedeemPolaItem('c', false)}
-            {renderRedeemPolaItem('b', !redeemed)}
+            {renderRedeemPolaItem('c', !redeemed)}
+            {renderRedeemPolaItem('b', false)}
             {renderRedeemPolaItem('a', false)}
           </div>
         </Panel>
@@ -161,8 +161,7 @@ const PolaPage = () => {
       <Collapse defaultActiveKey={['1']} onChange={onChange}>
         <Panel header={'Design Thinking'} key="1">
           <div style={{ display: 'flex' }}>
-            {renderPolaItem('c', '22')}
-            {redeemed ? renderPolaItem('b', '8888') : ''}
+            {redeemed ? renderPolaItem('c', '8888') : ''}
           </div>
         </Panel>
         <Panel header="Analog photography" key="2">
