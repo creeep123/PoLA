@@ -1,19 +1,15 @@
-import { Layout, Button, Modal, Divider, Radio, Typography } from 'antd';
+import { Layout, Button, Modal, Typography } from 'antd';
 import { Col, Row } from 'antd';
 import React, { useState, useRef, useContext } from 'react';
 import PolaContext from '../../components/context';
 import {
   InboxOutlined,
   CameraOutlined,
-  CheckOutlined,
-  HighlightOutlined,
-  SmileFilled,
-  SmileOutlined,
 } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import { Camera } from 'react-camera-pro';
 const { Dragger } = Upload;
-const { Header, Content, Footer, Sider } = Layout;
+const { Content } = Layout;
 const { Paragraph, Text } = Typography;
 
 const props = {
@@ -48,22 +44,9 @@ const ProfilePage = () => {
   // Camera Related Starts
   const camera = useRef(null);
   const [image, setImage] = useState(null);
+  const [takingPhoto, setTakingPhoto] = useState(false)
+  const [avatarImage, setAvatarImage] = useState("./assets/defultPic.png");
   const [useCamera, setUseCamera] = useState(false);
-
-  var submitNum = 0;
-  var imgPath = "./assets/successPic.png";
-
-  const changeImg = () => {
-    if(submitNum == 0){
-    imgPath = "./assets/successPic.png";
-    }
-    if(submitNum == 1){
-    imgPath = "./assets/successPic.png";
-    }
-    if(submitNum == 2){
-    imgPath = "./assets/takePhotoPic.jpg";
-    }
-  };
 
   const showModal = () => {
     setOpen(true);
@@ -71,8 +54,13 @@ const ProfilePage = () => {
   // Camera Related Ends
 
   const handleOk = () => {
-    submitNum ++;
     setLoading(true);
+    if(takingPhoto){
+      const imgNum = Math.round(Math.random() * 10)
+      setAvatarImage(`./assets/${imgNum}.png`)
+    }else{
+      setAvatarImage("./assets/successPic.png")
+    }
     setTimeout(() => {
       setLoading(false);
       setOpen(false);
@@ -116,7 +104,7 @@ const ProfilePage = () => {
               <Col span={20}>
                 <img
                   width="80%"
-                  src={imgPath}
+                  src={require(`${avatarImage}`)}
                   alt="DefaultPic"
                   style={{
                     marginTop: '65px',
@@ -299,7 +287,10 @@ const ProfilePage = () => {
             <Row justify="center" marginTop={'16px'} marginBottom={'16px'}>
               <Button
                 type="primary"
-                onClick={() => setImage(camera.current.takePhoto())}
+                onClick={() => {
+                  setImage(camera.current.takePhoto())
+                  setTakingPhoto(true)
+                }}
                 icon={<CameraOutlined />}
               >
                 Take photo

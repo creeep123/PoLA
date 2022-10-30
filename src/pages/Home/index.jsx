@@ -35,7 +35,11 @@ const Home = () => {
   const children = [];
   for (let i = 0; i < courseData.length; i++) {
     children.push(
-      <Option key={courseData[i].courseName}>{courseData[i].courseName}</Option>
+      <Option key={courseData[i].courseName}>
+        <Link to={`/course/enroll/${courseData[i].courseName}`}>
+          {courseData[i].courseName}
+        </Link>
+      </Option>
     );
   }
 
@@ -46,7 +50,7 @@ const Home = () => {
           <Select
             onChange={(key) => {
               setSearchCourse(key);
-              showModal();
+              // showModal();
             }}
             size="large"
             showSearch
@@ -70,7 +74,7 @@ const Home = () => {
           onCancel={handleCancel}
           footer={null}
         >
-          <CourseList></CourseList>
+          <CourseList listType="popular"></CourseList>
         </Modal>
       </>
     );
@@ -111,7 +115,7 @@ const Home = () => {
             </Row>
             <Row>
               <Col span={24}>
-                <CourseList listType={"popular"}></CourseList>
+                <CourseList listType={'popular'}></CourseList>
               </Col>
             </Row>
           </Col>
