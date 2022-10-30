@@ -19,7 +19,7 @@ function Week3() {
             </Col>
             <Col span={24}>
                         <p>
-                        Rishi Sunak has made make his first address outside Downing Street after formally being appointed the UK’s new prime minister. 
+                        Rishi Sunak has made make his first address outside Downing Street after formally being appointed the UK's new prime minister. 
                         He has taken over from Liz Truss who was the country's shortest-serving PM. 
                         </p>
             </Col>

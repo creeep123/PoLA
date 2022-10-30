@@ -34,21 +34,18 @@ const onChange = (key) => {
 const Lecture = (level) => {
     const polaContext = useContext(PolaContext);
     const { role, address } = polaContext.store;
-    const items = [
-        getItem('Week 1', '1'),
-        getItem('Week 2', '2'),
-        getItem('Week 3', '3'),
-    ];
+    const [items, setItem] = useState([getItem('Week1','1'), getItem('Week2','2')]);
     const [current,setCurrent] = useState('1');
     const onClick = (e) => {
         console.log('click ', e);
         setCurrent(e.key);
     };
-    const [URL, setURL] = useState('');
-    const [Description, setDescription] = useState('');
+    const [URL, setURL] = useState('https://www.youtube.com/watch?v=o06qqMh_Vao');
+    const [Description, setDescription] = useState("Rishi Sunak has made make his first address outside Downing Street after formally being appointed the UK's new prime minister. He has taken over from Liz Truss who was the country's shortest-serving PM. ");
 
     const handleSubmit = event => {
         message.success('Submited Successfully');
+        setItem( items => [...items, getItem('Week3','3')]);
         event.preventDefault(); // 👈️ prevent page refresh
 
         // 👇️ clear all input values in the form
